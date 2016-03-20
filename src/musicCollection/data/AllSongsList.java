@@ -2,15 +2,14 @@ package musicCollection.data;
 
 import fileUtils.JSONFileReader;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
+import parserUtils.JSONFileParser;
 
 public class AllSongsList {
 
@@ -30,43 +29,21 @@ public class AllSongsList {
     }
 
     private void fillAllSongsList(String fileName) throws IOException, java.text.ParseException {
-        JSONParser parser = new JSONParser();
+        JSONParser jsonParser = new JSONParser();
+        JSONFileParser parser = new JSONFileParser();
 
         try {
-            Object obj = parser.parse(JSONFileReader.readerFromJSON(fileName));
+            Object obj = jsonParser.parse(JSONFileReader.readerFromJSON(fileName));
 
             JSONObject jsonObject = (JSONObject) obj;
-            JSONArray jsonArray = (JSONArray) jsonObject.get("playList");
+            JSONArray jsonArray = (JSONArray) jsonObject.get(fileName.substring(0, fileName.length() - 5));
             Iterator<JSONObject> iterator = jsonArray.iterator();
 
             ArrayList<Song> allSongsList = new ArrayList<Song>();
 
-            while (iterator.hasNext()) {  // имеет ли смысл переносить весь код из цикла в отдельный класс Parser?
-                Song song = new Song();
-
-                JSONObject songObject = iterator.next();
-                song.setAlbum(songObject.get("album").toString());
-                song.setArtist(songObject.get("artist").toString());
-                song.setTitle(songObject.get("title").toString());
-                song.setYear(((Long) songObject.get("year")).intValue());
-                song.setPlaybacks(((Long) songObject.get("playbacks")).intValue());
-                song.setRating((Double) songObject.get("rating"));
-                song.setTags((ArrayList) songObject.get("tags"));
-
-                ArrayList<String> stringDates = new ArrayList<>();
-                ArrayList<Date> dateDates = new ArrayList<>();
-
-                stringDates = (((ArrayList) songObject.get("playdate")));
-
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-                for (String date : stringDates) {
-                    dateDates.add(formatter.parse(date));
-                }
-
-                song.setPlaydate(dateDates);   // output like 2016-02-27 - formatter.format(date)
-
-                allSongsList.add(song);
+            while (iterator.hasNext()) {
+                Song song = parser.parseSongInfo(iterator.next(), new Song());
+                this.allSongsList.add(song);
             }
 
         } catch (ParseException e) {
@@ -75,18 +52,17 @@ public class AllSongsList {
     }
 
     public void addSong(String title, String artist, String album, int year, int playbacks,
-            double rating, ArrayList<String> tags, ArrayList<Date> playdate) {
+            double rating, ArrayList<String> tags) {
 
-        Song song = new Song(title, artist, album, year, playbacks, rating, tags, playdate);
+        Song song = new Song(title, artist, album, year, playbacks, rating, tags);
         this.allSongsList.add(song);
-        
+
         //writer
     }
 
-    ///// ???
     public void editSong(Song song, String title, String artist, String album, int year, int playbacks,
-            double rating, ArrayList<String> tags, ArrayList<Date> playdate) {
-        
+            double rating, ArrayList<String> tags) {
+
         song.setTitle(title);
         song.setArtist(artist);
         song.setAlbum(album);
@@ -94,14 +70,13 @@ public class AllSongsList {
         song.setPlaybacks(playbacks);
         song.setRating(rating);
         song.setTags(tags);
-        song.setPlaydate(playdate);
-        
+
         //writer
     }
 
     public void deleteSong() { // Признак?
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
+
     }
 
 }

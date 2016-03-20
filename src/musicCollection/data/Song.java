@@ -5,53 +5,48 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Song implements Serializable {
+
     private String title;
     private String artist;
     private String album;
-    private int year;    
+    private int year;
     private int playbacks;
     private double rating;
     private ArrayList<String> tags;
-    private ArrayList<Date> playdate;
-    
-    public Song(String title, String artist, String album, int year, int playbacks, 
-            double rating, ArrayList<String> tags, ArrayList<Date> playdate) {
-        this.title = title;        
+
+    public Song(String title, String artist, String album, int year, int playbacks,
+            double rating, ArrayList<String> tags) {
+        this.title = title;
         this.artist = artist;
         this.album = album;
         this.year = year;
         this.playbacks = playbacks;
         this.rating = rating;
         this.tags = tags;
-        this.playdate = playdate;
-    }
-    
-    public Song() {       
-        
     }
 
-    
-      @Override
+    public Song() {
+
+    }
+
+    @Override
     public String toString() {
-        
-        String str = "title = " + getTitle() + ", artist = " + getArtist() + ", album = " + getAlbum() + 
-                ", year = " + getYear() + ", playbacks = " + getPlaybacks() + ", rating = " + rating;
-        
-        str += ", tags : ";
-        for (String tag: getTags()) { 
+
+        String str = "title = " + getTitle() + ", artist = " + getArtist() + ", album = " + getAlbum()
+                + ", year = " + getYear() + ", playbacks = " + getPlaybacks() + ", rating = " + rating;
+
+        str += ", tags : [";
+
+        for (String tag : getTags()) {
             str += tag + ", ";
         }
-        
-        str += "play date : ";
-        for (Date date: getPlaydate()) {
-            str += date + ", ";
-        }
-        
+
+        str += " ]";
+
         return str;
     }
 
-    
-    // ВАЛИДАЦИЯ
+    // Validation
     /**
      * @return the title
      */
@@ -148,19 +143,5 @@ public class Song implements Serializable {
      */
     public void setTags(ArrayList<String> tags) {
         this.tags = tags;
-    }
-
-    /**
-     * @return the playdate
-     */
-    public ArrayList<Date> getPlaydate() {
-        return playdate;
-    }
-
-    /**
-     * @param playdate the playdate to set
-     */
-    public void setPlaydate(ArrayList<Date> playdate) {
-        this.playdate = playdate;
     }
 }

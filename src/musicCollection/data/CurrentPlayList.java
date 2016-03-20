@@ -2,7 +2,7 @@ package musicCollection.data;
 
 import java.util.ArrayList;
 
-public class CurrentPlayList {
+public class CurrentPlayList /*extends AllSongsList */{
     private ArrayList<Song> currentPlayList;
     
     public CurrentPlayList() {
@@ -13,11 +13,11 @@ public class CurrentPlayList {
         return currentPlayList;
     }
     
-    public void addSong() {
+    public void addSong() {  // override methods from the AllSongsClass (parent)
         
     }
     
-    public void deleteSong() {
+    public void deleteSong() {  // override methods from the AllSongsClass (parent)
         
     }    
     

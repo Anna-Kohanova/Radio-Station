@@ -2,7 +2,6 @@ package musicCollection.data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Song implements Serializable {
 

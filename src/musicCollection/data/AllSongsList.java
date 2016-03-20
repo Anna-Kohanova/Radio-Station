@@ -12,35 +12,34 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
 
-public class PlayList {
+public class AllSongsList {
 
-    private ArrayList<Song> playList;
+    private ArrayList<Song> allSongsList;
 
-    public PlayList(String fileName) throws IOException, java.text.ParseException {
-
-        playList = new ArrayList<Song>();
-        this.fillPlayList(fileName);
+    public AllSongsList(String fileName) throws IOException, java.text.ParseException {
+        allSongsList = new ArrayList<Song>();
+        this.fillAllSongsList(fileName);
     }
 
-    public ArrayList<Song> getPlayList() {
-        return playList;
+    public ArrayList<Song> getAllSongsList() {
+        return allSongsList;
     }
 
-    public void setPlayList(ArrayList<Song> playList) {
-        this.playList = playList;
+    public void setAllSongsList(ArrayList<Song> allSongsList) {
+        this.allSongsList = allSongsList;
     }
 
-    private void fillPlayList(String fileName) throws IOException, java.text.ParseException {
+    private void fillAllSongsList(String fileName) throws IOException, java.text.ParseException {
         JSONParser parser = new JSONParser();
 
         try {
             Object obj = parser.parse(JSONFileReader.readerFromJSON(fileName));
-            
+
             JSONObject jsonObject = (JSONObject) obj;
             JSONArray jsonArray = (JSONArray) jsonObject.get("playList");
             Iterator<JSONObject> iterator = jsonArray.iterator();
-            
-            ArrayList<Song> playList = new ArrayList<Song>();
+
+            ArrayList<Song> allSongsList = new ArrayList<Song>();
 
             while (iterator.hasNext()) {  // имеет ли смысл переносить весь код из цикла в отдельный класс Parser?
                 Song song = new Song();
@@ -54,8 +53,8 @@ public class PlayList {
                 song.setRating((Double) songObject.get("rating"));
                 song.setTags((ArrayList) songObject.get("tags"));
 
-                ArrayList<String> stringDates = new ArrayList<String>();
-                ArrayList<Date> dateDates = new ArrayList<Date>();
+                ArrayList<String> stringDates = new ArrayList<>();
+                ArrayList<Date> dateDates = new ArrayList<>();
 
                 stringDates = (((ArrayList) songObject.get("playdate")));
 
@@ -66,28 +65,43 @@ public class PlayList {
                 }
 
                 song.setPlaydate(dateDates);   // output like 2016-02-27 - formatter.format(date)
-                
-                playList.add(song);              
-                
+
+                allSongsList.add(song);
             }
-            
-            this.setPlayList(playList);
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
 
-    public void addSong() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addSong(String title, String artist, String album, int year, int playbacks,
+            double rating, ArrayList<String> tags, ArrayList<Date> playdate) {
+
+        Song song = new Song(title, artist, album, year, playbacks, rating, tags, playdate);
+        this.allSongsList.add(song);
+        
+        //writer
     }
 
-    public void editSong() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    ///// ???
+    public void editSong(Song song, String title, String artist, String album, int year, int playbacks,
+            double rating, ArrayList<String> tags, ArrayList<Date> playdate) {
+        
+        song.setTitle(title);
+        song.setArtist(artist);
+        song.setAlbum(album);
+        song.setYear(year);
+        song.setPlaybacks(playbacks);
+        song.setRating(rating);
+        song.setTags(tags);
+        song.setPlaydate(playdate);
+        
+        //writer
     }
 
-    public void deleteSong() {
+    public void deleteSong() { // Признак?
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
 }

@@ -26,8 +26,7 @@ public class Song implements Serializable {
         this.playdate = playdate;
     }
     
-    public Song() {
-        
+    public Song() {       
         
     }
 
@@ -51,6 +50,8 @@ public class Song implements Serializable {
         return str;
     }
 
+    
+    // ВАЛИДАЦИЯ
     /**
      * @return the title
      */

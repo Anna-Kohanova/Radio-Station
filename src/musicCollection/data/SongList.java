@@ -11,11 +11,11 @@ import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
 import parserUtils.JSONFileParser;
 
-public class AllSongsList {
+public class SongList {
 
-    private ArrayList<Song> allSongsList;
+    private ArrayList<Song> allSongsList; //interface
 
-    public AllSongsList(String fileName) throws IOException, java.text.ParseException {
+    public SongList(String fileName) throws IOException, java.text.ParseException {
         allSongsList = new ArrayList<Song>();
         this.fillAllSongsList(fileName);
     }
@@ -51,30 +51,14 @@ public class AllSongsList {
         }
     }
 
-    public void addSong(String title, String artist, String album, int year, int playbacks,
+    public void addSong(String title, String artist, String album, String year, int playbacks,
             double rating, ArrayList<String> tags) {
 
         Song song = new Song(title, artist, album, year, playbacks, rating, tags);
         this.allSongsList.add(song);
-
-        //writer
     }
 
-    public void editSong(Song song, String title, String artist, String album, int year, int playbacks,
-            double rating, ArrayList<String> tags) {
-
-        song.setTitle(title);
-        song.setArtist(artist);
-        song.setAlbum(album);
-        song.setYear(year);
-        song.setPlaybacks(playbacks);
-        song.setRating(rating);
-        song.setTags(tags);
-
-        //writer
-    }
-
-    public void deleteSong() { // Признак?
+    public void deleteSong() { // Признак
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
     }

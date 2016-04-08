@@ -3,22 +3,32 @@ package radioStation;
 import fileUtils.JSONFileWriter;
 import java.io.IOException;
 import java.text.ParseException;
-import musicCollection.data.AllSongsList;
+import java.util.ArrayList;
+import musicCollection.data.SongList;
 import musicCollection.data.Song;
+import musicCollection.searchUtils.Searchable;
+import musicCollection.searchUtils.Searching;
 
 public class RadioStation {
 
     public static void main(String[] args) throws IOException, ParseException {
         String fileName = "allSongs.json";        
-        AllSongsList allSongsList = new AllSongsList(fileName);
+        SongList allSongsList = new SongList(fileName);
         
-        for (Song s: allSongsList.getAllSongsList()) {
-            System.out.println(s.toString());
-        }
+        // Print all songs
+//        for (Song s: allSongsList.getAllSongsList()) {
+//            System.out.println(s.toString());
+//        }
+        
+        Searching search = new Searching(allSongsList.getAllSongsList());
+        ArrayList<Song> foundingSongs = search.search("rock singer");
+        
+        // Print all songs with keyword
+//        for (Song s: foundingSongs) {
+//            System.out.println(foundingSongs.toString());
+//        }
         
         JSONFileWriter jsonWriter = new JSONFileWriter(fileName);
-        jsonWriter.writerToJSON(allSongsList.getAllSongsList());
-     
-    }
-    
+        jsonWriter.writerToJSON(allSongsList.getAllSongsList());     
+    }    
 }

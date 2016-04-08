@@ -11,7 +11,7 @@ public class JSONFileParser {
         song.setAlbum(songObject.get("album").toString());
         song.setArtist(songObject.get("artist").toString());
         song.setTitle(songObject.get("title").toString());
-        song.setYear(((Long) songObject.get("year")).intValue());
+        song.setYear(songObject.get("year").toString());
         song.setPlaybacks(((Long) songObject.get("playbacks")).intValue());
         song.setRating((Double) songObject.get("rating"));
         song.setTags((ArrayList) songObject.get("tags"));

@@ -1,19 +1,18 @@
 package musicCollection.data;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Song implements Serializable {
+public class Song {
 
     private String title;
     private String artist;
     private String album;
-    private int year;
+    private String year;
     private int playbacks;
     private double rating;
     private ArrayList<String> tags;
 
-    public Song(String title, String artist, String album, int year, int playbacks,
+    public Song(String title, String artist, String album, String year, int playbacks,
             double rating, ArrayList<String> tags) {
         this.title = title;
         this.artist = artist;
@@ -91,14 +90,14 @@ public class Song implements Serializable {
     /**
      * @return the year
      */
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
     /**
      * @param year the year to set
      */
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 

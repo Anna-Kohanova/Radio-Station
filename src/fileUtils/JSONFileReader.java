@@ -7,10 +7,10 @@ import java.io.IOException;
 
 public final class JSONFileReader {
 
-    private static File file;
-    private static FileInputStream stream;
+    private File file;
+    private FileInputStream stream;
     
-    public static String readerFromJSON(String fileName) throws FileNotFoundException, IOException {
+    public String readerFromJSON(String fileName) throws FileNotFoundException, IOException {
         
         file = new File(fileName);
         if(!file.exists()) {

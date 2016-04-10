@@ -6,7 +6,7 @@ import musicCollection.data.Song;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class SongParser implements Parseable <Song> {
+public class SongParser implements Parser <Song> {
 
     @Override
     public ArrayList<Song> parser(Object obj) {

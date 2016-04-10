@@ -1,4 +1,4 @@
-package fileUtils;
+package sourceUtils;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,13 +7,13 @@ import musicCollection.data.Song;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class JSONFileWriter {
+public class JSONWriter {
 
     private FileWriter file;
     private JSONObject obj;
     private String fileName;
 
-    public JSONFileWriter(String fileName) throws IOException {
+    public JSONWriter(String fileName) throws IOException {
         file = new FileWriter(fileName);
         obj = new JSONObject();
         this.fileName = fileName;

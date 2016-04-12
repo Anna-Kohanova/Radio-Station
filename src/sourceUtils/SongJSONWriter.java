@@ -7,13 +7,13 @@ import musicCollection.data.Song;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class JSONWriter {
+public class SongJSONWriter {
 
     private FileWriter file;
     private JSONObject obj;
     private String fileName;
 
-    public JSONWriter(String fileName) throws IOException {
+    public SongJSONWriter(String fileName) throws IOException {
         file = new FileWriter(fileName);
         obj = new JSONObject();
         this.fileName = fileName;

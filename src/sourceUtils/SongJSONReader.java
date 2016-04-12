@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public final class JSONReader implements Loader {
+public final class SongJSONReader implements Loader {
 
     private File file;
     private FileInputStream stream;
@@ -30,9 +30,9 @@ public final class JSONReader implements Loader {
             return new String(data, "UTF-8");
 
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(JSONReader.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SongJSONReader.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(JSONReader.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SongJSONReader.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

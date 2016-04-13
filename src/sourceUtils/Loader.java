@@ -1,5 +1,8 @@
 package sourceUtils;
 
+import java.util.ArrayList;
+
 public interface Loader <T>{
-    T load(String sourceName);
+    String loadFrom(String sourceName);
+    void loadTo(ArrayList<T> collection, String sourceName);
 }

@@ -1,38 +1,25 @@
 package parserUtils;
 
+import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.Iterator;
 import musicCollection.data.Song;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class SongParser implements Parser <Song> {
+public class SongParser implements Parser<Song> {
 
     @Override
-    public ArrayList<Song> parser(Object obj) {
+    public ArrayList<Song> parser(String str) {
+        ArrayList<Song> songList = new ArrayList<Song>();
 
-        ArrayList<Song> songList = new ArrayList<>();
-
-            JSONObject jsonObject = (JSONObject) obj;
-            JSONArray jsonArray = (JSONArray) jsonObject.get("allSongs");
-            Iterator<JSONObject> iterator = jsonArray.iterator();
-
-            while (iterator.hasNext()) {
-                Song song = new Song();
-                
-                JSONObject songIterator = iterator.next();
-
-                song.setAlbum(songIterator.get("album").toString());
-                song.setArtist(songIterator.get("artist").toString());
-                song.setTitle(songIterator.get("title").toString());
-                song.setYear(songIterator.get("year").toString());
-                song.setPlaybacks(((Long) songIterator.get("playbacks")).intValue());
-                song.setRating((Double) songIterator.get("rating"));
-                song.setTags((ArrayList) songIterator.get("tags"));
-                
-                songList.add(song);
-            }
+        Gson gson = new Gson();
+        Song[] songs = gson.fromJson(str, Song[].class);
         
+        for (Song song : songs) {
+            songList.add(song);
+        }
+
         return songList;
     }
 }

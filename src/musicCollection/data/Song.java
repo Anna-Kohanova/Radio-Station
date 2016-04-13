@@ -3,6 +3,7 @@ package musicCollection.data;
 import java.util.ArrayList;
 
 public class Song {
+
     private String title;
     private String artist;
     private String album;
@@ -42,15 +43,15 @@ public class Song {
 
         return str;
     }
-    
+
     public String getTitle() {
         return title;
     }
-    
+
     public void setTitle(String title) {
         this.title = title;
     }
-    
+
     public String getArtist() {
         return artist;
     }
@@ -70,10 +71,16 @@ public class Song {
     public String getYear() {
         return year;
     }
-    
-    //Validation
+
     public void setYear(String year) {
-        this.year = year;
+        String regex = "\\d+";
+        
+        if (year.matches(regex)) {
+            this.year = year;
+        }
+        else {
+            this.year = "0";
+        }
     }
 
     public int getPlaybacks() {

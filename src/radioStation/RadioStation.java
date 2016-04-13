@@ -1,5 +1,6 @@
 package radioStation;
 
+import com.google.gson.Gson;
 import sourceUtils.SongJSONReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -10,16 +11,18 @@ import musicCollection.data.Song;
 import org.json.simple.parser.JSONParser;
 import parserUtils.SongParser;
 
+
 public class RadioStation {    
 
     public static void main(String[] args) throws IOException, ParseException, org.json.simple.parser.ParseException {
         String fileName = "allSongs.json";
-        JSONParser jsonParser = new JSONParser();
-        SongParser parser = new SongParser();
+        
         SongJSONReader reader = new SongJSONReader();
-
-        Object obj = jsonParser.parse(reader.load(fileName));
-        ArrayList<Song> musicCollection = parser.parser(obj);
+        SongParser songParser = new SongParser();
+        
+        String str = reader.load(fileName);
+        
+        ArrayList<Song> musicCollection = songParser.parser(str);
 
         ///////////// PRINT MUSIC COLLECTION //////////////
         for (Song s : musicCollection) {

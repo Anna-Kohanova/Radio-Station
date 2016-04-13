@@ -1,1 +1,38 @@
-[{"tags":["alternative","rock singer"],"title":"Hyptonic","album":"Kicker","playbacks":0,"year":"2015","rating":0.0,"artist":"Zella Day"},{"tags":["alternative","rock singer"],"title":"Compass","album":"Kicker","playbacks":0,"year":"2014","rating":0.0,"artist":"Zella Day"},{"tags":["rock","metal"],"title":"Hero","album":"World","playbacks":0,"year":"2011","rating":0.0,"artist":"Skillet"}]
+[
+  {
+    "title": "Hyptonic",
+    "artist": "Zella Day",
+    "album": "Kicker",
+    "year": "2015",
+    "playbacks": 0,
+    "rating": 0.0,
+    "tags": [
+      "alternative",
+      "rock singer"
+    ]
+  },
+  {
+    "title": "Compass",
+    "artist": "Zella Day",
+    "album": "Kicker",
+    "year": "2014",
+    "playbacks": 0,
+    "rating": 0.0,
+    "tags": [
+      "alternative",
+      "rock singer"
+    ]
+  },
+  {
+    "title": "Hero",
+    "artist": "Skillet",
+    "album": "World",
+    "year": "2011",
+    "playbacks": 0,
+    "rating": 0.0,
+    "tags": [
+      "rock",
+      "metal"
+    ]
+  }
+]

@@ -1,6 +1,5 @@
 package radioStation;
 
-import com.google.gson.Gson;
 import sourceUtils.SongJSONReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -8,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import musicCollection.data.Song;
-import org.json.simple.parser.JSONParser;
 import parserUtils.SongParser;
+import sourceUtils.SongJSONWriter;
 
 
 public class RadioStation {    
@@ -42,8 +41,8 @@ public class RadioStation {
 //        }
         
         ////////////// WRITING TO JSON  //////////////
-//        JSONWriter jsonWriter = new JSONWriter(fileName);
-//        jsonWriter.writerToJSON(allSongsList.getAllSongsList());     
+        SongJSONWriter jsonWriter = new SongJSONWriter(fileName);
+        jsonWriter.writerToJSON(musicCollection);     
     }
 
     public static ArrayList<Song> sort(ArrayList<Song> collection, String sortKeyword) {

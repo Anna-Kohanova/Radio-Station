@@ -1,6 +1,6 @@
 package radioStation;
 
-import sourceUtils.SongJSONLoader;
+import sourceUtils.JSONSongReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import musicCollection.data.Song;
 import parserUtils.SongParser;
+import sourceUtils.JSONSongWriter;
 
 
 public class RadioStation {    
@@ -15,12 +16,8 @@ public class RadioStation {
     public static void main(String[] args) throws IOException, ParseException, org.json.simple.parser.ParseException {
         String fileName = "allSongs.json";
         
-        SongJSONLoader reader = new SongJSONLoader();
-        SongParser songParser = new SongParser();
-        
-        String str = reader.loadFrom(fileName);
-        
-        ArrayList<Song> musicCollection = songParser.parser(str);
+        JSONSongReader reader = new JSONSongReader();
+        ArrayList<Song> musicCollection = reader.load(fileName);
 
         ///////////// PRINT MUSIC COLLECTION //////////////
         for (Song s : musicCollection) {
@@ -40,8 +37,8 @@ public class RadioStation {
 //        }
         
         ////////////// WRITING TO JSON  //////////////
-        SongJSONLoader jsonWriter = new SongJSONLoader();
-        jsonWriter.loadTo(musicCollection, fileName);     
+        JSONSongWriter jsonWriter = new JSONSongWriter();
+        jsonWriter.write(musicCollection, fileName);     
     }
 
     public static ArrayList<Song> sort(ArrayList<Song> collection, String sortKeyword) {

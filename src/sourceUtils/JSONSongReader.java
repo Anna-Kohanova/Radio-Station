@@ -11,11 +11,15 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import musicCollection.data.Song;
+import parserUtils.SongParser;
 
-public final class SongJSONLoader implements Loader <Song> {
+public final class JSONSongReader implements Loader <Song> {
 
     @Override
-    public String loadFrom(String sourceName) {
+    public ArrayList<Song> load(String sourceName) {
+        
+        SongParser songParser = new SongParser();
+        
         byte[] data;
 
         try {
@@ -29,26 +33,17 @@ public final class SongJSONLoader implements Loader <Song> {
             data = new byte[(int) file.length()];
             stream.read(data);
             stream.close();
-            return new String(data, "UTF-8");
+            
+            ArrayList<Song> musicCollection = songParser.parser(new String(data, "UTF-8"));
+            return musicCollection;
 
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(SongJSONLoader.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JSONSongReader.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(SongJSONLoader.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            Logger.getLogger(JSONSongReader.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+        
+        
         return null;
     }
-
-    @Override
-    public void loadTo(ArrayList<Song> musicCollection, String sourceName) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String str = gson.toJson(musicCollection);
-        
-        try (FileWriter file = new FileWriter(sourceName)) {
-            file.write(str);
-        } catch (IOException ex) {
-            Logger.getLogger(SongJSONLoader.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
 }

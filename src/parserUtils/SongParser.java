@@ -2,10 +2,7 @@ package parserUtils;
 
 import com.google.gson.Gson;
 import java.util.ArrayList;
-import java.util.Iterator;
 import musicCollection.data.Song;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 public class SongParser implements Parser<Song> {
 
